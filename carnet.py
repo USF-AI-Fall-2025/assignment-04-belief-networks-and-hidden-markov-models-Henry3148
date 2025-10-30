@@ -82,31 +82,34 @@ car_model.add_cpds( cpd_starts, cpd_ignition, cpd_gas, cpd_radio, cpd_battery, c
 
 car_infer = VariableElimination(car_model)
 
-print("Probability of car moving given Radio works and car starts:")
-print(car_infer.query(variables=["Moves"],evidence={"Radio":"turns on", "Starts":"yes"}))
-#battery not working given not moving
-print("Probability of Battery not working given car doesn't move:")
-print(car_infer.query(variables=["Battery"],evidence={"Moves":"no"}))
-#Given that the radio is not working, what is the probability that the car will not start?
-print("Probability of car not starting given Radio doesn't turn on:")
-print(car_infer.query(variables=["Starts"],evidence={"Radio":"Doesn't turn on"}))
-#Given that the battery is working, does the probability of the radio working change if we discover
-#that the car has gas in it?
-print("Probability of Radio working given Battery works:")
-print(car_infer.query(variables=["Radio"],evidence={"Battery":"Works"}))
-print("Probability of Radio working given Battery works and gas:")
-print(car_infer.query(variables=["Radio"],evidence={"Battery":"Works", "Gas":"Full"}))
-#Given that the car doesn't move, how does the probability of the ignition failing change if we
-#observe that the car does not have gas in it?
-print("Probability of Ignition failing given the car doesn't move:")
-print(car_infer.query(variables=["Ignition"],evidence={"Moves":"no"}))
-print("Probability of Ignition failing given the car doesn't move and no gas:")
-print(car_infer.query(variables=["Ignition"],evidence={"Moves":"no", "Gas":"Empty"}))
-#What is the probability that the car starts if the radio works and it has gas in it? Include each of
-#your queries in carnet.py. Also, please add a main that executes your queries.
-print("Probability that the car starts if the radio works and it has gas in it:")
-print(car_infer.query(variables=["Starts"],evidence={"Radio":"turns on", "Gas":"Full"}))
-#key present given car doesnt move
-print("Probability of Key being present given the car doesn't move:")
-print(car_infer.query(variables=["KeyPresent"],evidence={"Moves":"no"}))
+def main():
+    print("Probability of car moving given Radio works and car starts:")
+    print(car_infer.query(variables=["Moves"],evidence={"Radio":"turns on", "Starts":"yes"}))
+    #battery not working given not moving
+    print("Probability of Battery not working given car doesn't move:")
+    print(car_infer.query(variables=["Battery"],evidence={"Moves":"no"}))
+    #Given that the radio is not working, what is the probability that the car will not start?
+    print("Probability of car not starting given Radio doesn't turn on:")
+    print(car_infer.query(variables=["Starts"],evidence={"Radio":"Doesn't turn on"}))
+    #Given that the battery is working, does the probability of the radio working change if we discover
+    #that the car has gas in it?
+    print("Probability of Radio working given Battery works:")
+    print(car_infer.query(variables=["Radio"],evidence={"Battery":"Works"}))
+    print("Probability of Radio working given Battery works and gas:")
+    print(car_infer.query(variables=["Radio"],evidence={"Battery":"Works", "Gas":"Full"}))
+    #Given that the car doesn't move, how does the probability of the ignition failing change if we
+    #observe that the car does not have gas in it?
+    print("Probability of Ignition failing given the car doesn't move:")
+    print(car_infer.query(variables=["Ignition"],evidence={"Moves":"no"}))
+    print("Probability of Ignition failing given the car doesn't move and no gas:")
+    print(car_infer.query(variables=["Ignition"],evidence={"Moves":"no", "Gas":"Empty"}))
+    #What is the probability that the car starts if the radio works and it has gas in it? Include each of
+    #your queries in carnet.py. Also, please add a main that executes your queries.
+    print("Probability that the car starts if the radio works and it has gas in it:")
+    print(car_infer.query(variables=["Starts"],evidence={"Radio":"turns on", "Gas":"Full"}))
+    #key present given car doesnt move
+    print("Probability of Key being present given the car doesn't move:")
+    print(car_infer.query(variables=["KeyPresent"],evidence={"Moves":"no"}))
 
+if __name__ == "__main__":
+    main()
